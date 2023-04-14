@@ -55,7 +55,7 @@ func UserRegister(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param models.User body models.User true "login a user"
-// @Success 201 {object} models.Response
+// @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
 // @Router /users/login [post]
 func UserLogin(c *gin.Context) {
