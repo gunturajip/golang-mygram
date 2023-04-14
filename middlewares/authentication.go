@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"golang-jwt-auth/helpers"
+	"golang-mygram/helpers"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

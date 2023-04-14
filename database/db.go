@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"golang-jwt-auth/models"
+	"golang-mygram/models"
 	"log"
 	"os"
 
@@ -34,7 +34,7 @@ func StartDB() {
 	}
 
 	fmt.Println("successfully connected to database🔥")
-	db.Debug().AutoMigrate(models.User{}, models.Product{})
+	db.Debug().AutoMigrate(models.User{}, models.Photo{}, models.Socialmedia{}, models.Comment{})
 }
 
 func GetDB() *gorm.DB {

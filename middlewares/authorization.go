@@ -1,8 +1,8 @@
 package middlewares
 
 import (
-	"golang-jwt-auth/database"
-	"golang-jwt-auth/models"
+	"golang-mygram/database"
+	"golang-mygram/models"
 	"net/http"
 	"strconv"
 
@@ -10,24 +10,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ProductAuthorization() gin.HandlerFunc {
+func PhotoAuthorization() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		db := database.GetDB()
-		productId, err := strconv.Atoi(c.Param("productId"))
+		photoID, err := strconv.Atoi(c.Param("photoID"))
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 				"error":   "Bad Request",
-				"message": "invalid parameter",
+				"message": "invalid photo parameter",
 			})
 			return
 		}
 
-		Product := models.Product{}
-		err = db.Select("user_id").First(&Product, uint(productId)).Error
+		Photo := models.Photo{}
+		err = db.First(&Photo, uint(photoID)).Error
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
-				"error":   "Data Not Found",
-				"message": "data doesn't exist",
+				"error":   "Not Found",
+				"message": "photo doesn't exist",
 			})
 			return
 		}
@@ -35,11 +35,11 @@ func ProductAuthorization() gin.HandlerFunc {
 		userData := c.MustGet("userData").(jwt.MapClaims)
 		admin := userData["admin"].(bool)
 		if !admin {
-			userId := uint(userData["id"].(float64))
-			if Product.UserID != userId {
+			userID := uint(userData["id"].(float64))
+			if Photo.UserID != userID {
 				c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 					"error":   "Unauthorized",
-					"message": "you are not allowed to access this data",
+					"message": "you are not allowed to update / delete this photo",
 				})
 				return
 			}
@@ -48,17 +48,93 @@ func ProductAuthorization() gin.HandlerFunc {
 	}
 }
 
-func ProductAuthorizationAll() gin.HandlerFunc {
+func CommentAuthorization() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		db := database.GetDB()
+		commentID, err := strconv.Atoi(c.Param("commentID"))
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+				"error":   "Bad Request",
+				"message": "invalid comment parameter",
+			})
+			return
+		}
+
+		Comment := models.Comment{}
+		err = db.First(&Comment, uint(commentID)).Error
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+				"error":   "Not Found",
+				"message": "comment doesn't exist",
+			})
+			return
+		}
+
 		userData := c.MustGet("userData").(jwt.MapClaims)
 		admin := userData["admin"].(bool)
 		if !admin {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-				"error":   "Unauthorized",
-				"message": "you are not allowed to access this data",
-			})
-			return
+			userID := uint(userData["id"].(float64))
+			if Comment.UserID != userID {
+				c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+					"error":   "Unauthorized",
+					"message": "you are not allowed to update / delete this comment",
+				})
+				return
+			}
 		}
 		c.Next()
 	}
 }
+
+func SocialMediaAuthorization() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		db := database.GetDB()
+		socialMediaID, err := strconv.Atoi(c.Param("socialMediaID"))
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+				"error":   "Bad Request",
+				"message": "invalid social media parameter",
+			})
+			return
+		}
+
+		Socialmedia := models.Socialmedia{}
+		err = db.First(&Socialmedia, uint(socialMediaID)).Error
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+				"error":   "Not Found",
+				"message": "social media doesn't exist",
+			})
+			return
+		}
+
+		userData := c.MustGet("userData").(jwt.MapClaims)
+		admin := userData["admin"].(bool)
+		if !admin {
+			userID := uint(userData["id"].(float64))
+			if Socialmedia.UserID != userID {
+				c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+					"error":   "Unauthorized",
+					"message": "you are not allowed to update / delete this social media",
+				})
+				return
+			}
+		}
+		c.Next()
+	}
+}
+
+// func AdminAuthorization() gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		userData := c.MustGet("userData").(jwt.MapClaims)
+// 		admin := userData["admin"].(bool)
+// 		if !admin {
+// 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+// 				"error":   "Unauthorized",
+// 				"message": "you are not allowed to access this data",
+// 			})
+// 			return
+// 		}
+// 		c.Next()
+// 	}
+// }

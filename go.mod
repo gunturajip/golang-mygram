@@ -1,4 +1,4 @@
-module golang-jwt-auth
+module golang-mygram
 
 go 1.19
 

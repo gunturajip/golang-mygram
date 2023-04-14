@@ -1,39 +1,73 @@
 basePath: /
 definitions:
-  models.Product:
+  models.Comment:
     properties:
       created_at:
         type: string
-      description:
+      id:
+        type: integer
+      message:
+        type: string
+      photo_id:
+        type: integer
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  models.Photo:
+    properties:
+      caption:
+        type: string
+      created_at:
         type: string
       id:
         type: integer
+      photo_url:
+        type: string
       title:
         type: string
       updated_at:
         type: string
-      user:
-        $ref: '#/definitions/models.User'
-      userID:
+      user_id:
+        type: integer
+    type: object
+  models.Response:
+    properties:
+      data: {}
+      error:
+        type: string
+      message:
+        type: string
+    type: object
+  models.Socialmedia:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      social_media_url:
+        type: string
+      updated_at:
+        type: string
+      user_id:
         type: integer
     type: object
   models.User:
     properties:
-      admin:
-        type: boolean
+      age:
+        type: integer
       created_at:
         type: string
       email:
         type: string
-      full_name:
-        type: string
       id:
         type: integer
-      products:
-        items:
-          $ref: '#/definitions/models.Product'
-        type: array
       updated_at:
+        type: string
+      username:
         type: string
     type: object
 host: localhost:8080
@@ -41,59 +75,69 @@ info:
   contact:
     email: soberkoder@swagger.io
     name: API Support
-  description: This is a simple service for managing products by admin and users
+  description: This is an Instagram Clone for CRUD-ing photos, and comments among
+    users
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
-  title: JWT Product CRUD API with Authentication and Authorization
+  title: Mygram (Instagram Clone)
   version: "1.0"
 paths:
-  /products:
+  /comments:
     get:
       consumes:
       - application/json
-      description: Get all products data by admin
+      description: Get all comments data
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Product'
-      summary: Get all products
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get all comments
       tags:
-      - products
+      - comment
     post:
       consumes:
       - application/json
-      description: Post details of a product corresponding to the input id
+      description: Post details of a new comment based on current user and certain
+        photo
       parameters:
-      - description: create a product
+      - description: create a comment
         in: body
-        name: models.Product
+        name: models.Comment
         required: true
         schema:
-          $ref: '#/definitions/models.Product'
+          $ref: '#/definitions/models.Comment'
       produces:
       - application/json
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           schema:
-            $ref: '#/definitions/models.Product'
-      summary: Post product details for the given id
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Post a new comment
       tags:
-      - product
-  /products/{Id}:
+      - comment
+  /comments/{ID}:
     delete:
       consumes:
       - application/json
-      description: Delete details of a product corresponding to the input id
+      description: Delete details of a comment corresponding to the input ID
       parameters:
-      - description: ID of the product
+      - description: ID of the comment
         in: path
-        name: Id
+        name: ID
         required: true
         type: integer
       produces:
@@ -102,18 +146,22 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Product'
-      summary: Delete product details for a given id
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Delete comment details for a given ID
       tags:
-      - product
+      - comment
     get:
       consumes:
       - application/json
-      description: Get details of a product corresponding to the input id
+      description: Get details of a comment corresponding to the input ID
       parameters:
-      - description: ID of the product
+      - description: ID of the comment
         in: path
-        name: Id
+        name: ID
         required: true
         type: integer
       produces:
@@ -122,18 +170,97 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Product'
-      summary: Get product details for the given id
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get comment details for the given ID
       tags:
-      - product
+      - comment
     put:
       consumes:
       - application/json
-      description: Update details of a product corresponding to the input id
+      description: Update details of a comment corresponding to the input ID
       parameters:
-      - description: ID of the product
+      - description: ID of the comment
         in: path
-        name: Id
+        name: ID
+        required: true
+        type: integer
+      - description: update comment
+        in: body
+        name: models.Comment
+        required: true
+        schema:
+          $ref: '#/definitions/models.Comment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Update comment for the given ID
+      tags:
+      - comment
+  /photos:
+    get:
+      consumes:
+      - application/json
+      description: Get all photos data
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get all photos
+      tags:
+      - photo
+    post:
+      consumes:
+      - application/json
+      description: Post details of a new photo based on current user
+      parameters:
+      - description: create a photo
+        in: body
+        name: models.Photo
+        required: true
+        schema:
+          $ref: '#/definitions/models.Photo'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Post a new photo
+      tags:
+      - photo
+  /photos/{ID}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete details of a photo corresponding to the input ID
+      parameters:
+      - description: ID of the photo
+        in: path
+        name: ID
         required: true
         type: integer
       produces:
@@ -142,8 +269,241 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Product'
-      summary: Update product for the given id
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Delete photo details for a given ID
       tags:
-      - product
+      - photo
+    get:
+      consumes:
+      - application/json
+      description: Get details of a photo corresponding to the input ID
+      parameters:
+      - description: ID of the photo
+        in: path
+        name: ID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get photo details for the given photo ID
+      tags:
+      - photo
+    put:
+      consumes:
+      - application/json
+      description: Update details of a photo corresponding to the input ID
+      parameters:
+      - description: ID of the photo
+        in: path
+        name: ID
+        required: true
+        type: integer
+      - description: update photo
+        in: body
+        name: models.Photo
+        required: true
+        schema:
+          $ref: '#/definitions/models.Photo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Update photo for the given ID
+      tags:
+      - photo
+  /socialmedia:
+    get:
+      consumes:
+      - application/json
+      description: Get all social media data
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get all social media
+      tags:
+      - social media
+    post:
+      consumes:
+      - application/json
+      description: Post details of a new social media based on current user
+      parameters:
+      - description: create a social media
+        in: body
+        name: models.Socialmedia
+        required: true
+        schema:
+          $ref: '#/definitions/models.Socialmedia'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Post a new social media
+      tags:
+      - social media
+  /socialmedia/{ID}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete details of a social media corresponding to the input ID
+      parameters:
+      - description: ID of the social media
+        in: path
+        name: ID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Delete social media details for a given ID
+      tags:
+      - social media
+    get:
+      consumes:
+      - application/json
+      description: Get details of a social media corresponding to the input ID
+      parameters:
+      - description: ID of the social media
+        in: path
+        name: ID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get social media details for the given ID
+      tags:
+      - social media
+    put:
+      consumes:
+      - application/json
+      description: Update details of a social media corresponding to the input ID
+      parameters:
+      - description: ID of the social media
+        in: path
+        name: ID
+        required: true
+        type: integer
+      - description: update social media
+        in: body
+        name: models.Socialmedia
+        required: true
+        schema:
+          $ref: '#/definitions/models.Socialmedia'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Update social media for the given ID
+      tags:
+      - social media
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: Register an existing user using email, and password
+      parameters:
+      - description: login a user
+        in: body
+        name: models.User
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Login an existing user
+      tags:
+      - user
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user using email, username, and password
+      parameters:
+      - description: register a user
+        in: body
+        name: models.User
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Register a new user
+      tags:
+      - user
 swagger: "2.0"

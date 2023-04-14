@@ -1,8 +1,8 @@
 package main
 
 import (
-	"golang-jwt-auth/database"
-	"golang-jwt-auth/router"
+	"golang-mygram/database"
+	"golang-mygram/router"
 	"os"
 )
 
