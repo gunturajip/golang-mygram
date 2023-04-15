@@ -11,6 +11,11 @@ import (
 
 var appJSON = "application/json"
 
+type loginInput struct {
+	Email    string `json:"email" form:"email" valid:"required~Your email is required, email~Invalid email format"`
+	Password string `form:"password" valid:"required~Your password is required, minstringlength(6)~Password has to have a minimum length of 6 characters"`
+}
+
 // UserRegister godoc
 // @Summary Register a new user
 // @Description Register a new user using email, username, and password
@@ -54,7 +59,7 @@ func UserRegister(c *gin.Context) {
 // @Tags user
 // @Accept json
 // @Produce json
-// @Param models.User body models.User true "login a user"
+// @Param Input body loginInput true "login a user"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
 // @Router /users/login [post]
@@ -65,17 +70,15 @@ func UserLogin(c *gin.Context) {
 	contentType := helpers.GetContentType(c)
 	_, _ = db, contentType
 	User := models.User{}
-	password := ""
+	loginInput := loginInput{}
 
 	if contentType == appJSON {
-		c.ShouldBindJSON(&User)
+		c.ShouldBindJSON(&loginInput)
 	} else {
-		c.ShouldBind(&User)
+		c.ShouldBind(&loginInput)
 	}
 
-	password = User.Password
-
-	err := db.Debug().Where("email = ?", User.Email).Take(&User).Error
+	err := db.Debug().Where("email = ?", loginInput.Email).Take(&User).Error
 
 	if err != nil {
 		response.Error = "Unauthorized"
@@ -84,7 +87,7 @@ func UserLogin(c *gin.Context) {
 		return
 	}
 
-	comparePass := helpers.ComparePass([]byte(User.Password), []byte(password))
+	comparePass := helpers.ComparePass([]byte(User.Password), []byte(loginInput.Password))
 
 	if !comparePass {
 		response.Error = "Unauthorized"

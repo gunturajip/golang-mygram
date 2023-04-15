@@ -709,11 +709,11 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "login a user",
-                        "name": "models.User",
+                        "name": "Input",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.User"
+                            "$ref": "#/definitions/controllers.loginInput"
                         }
                     }
                 ],
@@ -775,6 +775,17 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "controllers.loginInput": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Comment": {
             "type": "object",
             "properties": {

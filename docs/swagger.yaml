@@ -1,5 +1,12 @@
 basePath: /
 definitions:
+  controllers.loginInput:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
   models.Comment:
     properties:
       created_at:
@@ -542,10 +549,10 @@ paths:
       parameters:
       - description: login a user
         in: body
-        name: models.User
+        name: Input
         required: true
         schema:
-          $ref: '#/definitions/models.User'
+          $ref: '#/definitions/controllers.loginInput'
       produces:
       - application/json
       responses:
