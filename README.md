@@ -20,7 +20,7 @@ To run the project locally, follow these steps:
 
 ## Support
 
-If you find this project useful, please consider giving it a ⭐️ on [GitHub](https://github.com/gunturajip/golang-mygram). Your support is greatly appreciated! 😎
+If you find this project useful, please consider giving it a ⭐️ on [GitHub](https://github.com/gunturajip/golang-mygram). Your support is greatly appreciated!
 
 ## Endpoints
 
