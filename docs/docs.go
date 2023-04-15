@@ -777,7 +777,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "https://golang-mygram-production.up.railway.app",
+	Host:             "golang-mygram-production.up.railway.app",
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Mygram (Instagram Clone)",
