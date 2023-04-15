@@ -874,6 +874,9 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
+                "password": {
+                    "type": "string"
+                },
                 "updated_at": {
                     "type": "string"
                 },
