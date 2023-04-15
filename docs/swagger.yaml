@@ -89,6 +89,12 @@ paths:
       consumes:
       - application/json
       description: Get all comments data
+      parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -109,6 +115,11 @@ paths:
       description: Post details of a new comment based on current user and certain
         photo
       parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: create a comment
         in: body
         name: models.Comment
@@ -135,6 +146,11 @@ paths:
       - application/json
       description: Delete details of a comment corresponding to the input ID
       parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ID of the comment
         in: path
         name: ID
@@ -159,6 +175,11 @@ paths:
       - application/json
       description: Get details of a comment corresponding to the input ID
       parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ID of the comment
         in: path
         name: ID
@@ -183,6 +204,11 @@ paths:
       - application/json
       description: Update details of a comment corresponding to the input ID
       parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ID of the comment
         in: path
         name: ID
@@ -213,6 +239,12 @@ paths:
       consumes:
       - application/json
       description: Get all photos data
+      parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -232,6 +264,11 @@ paths:
       - application/json
       description: Post details of a new photo based on current user
       parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: create a photo
         in: body
         name: models.Photo
@@ -258,6 +295,11 @@ paths:
       - application/json
       description: Delete details of a photo corresponding to the input ID
       parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ID of the photo
         in: path
         name: ID
@@ -282,6 +324,11 @@ paths:
       - application/json
       description: Get details of a photo corresponding to the input ID
       parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ID of the photo
         in: path
         name: ID
@@ -306,6 +353,11 @@ paths:
       - application/json
       description: Update details of a photo corresponding to the input ID
       parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ID of the photo
         in: path
         name: ID
@@ -336,6 +388,12 @@ paths:
       consumes:
       - application/json
       description: Get all social media data
+      parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -355,6 +413,11 @@ paths:
       - application/json
       description: Post details of a new social media based on current user
       parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: create a social media
         in: body
         name: models.Socialmedia
@@ -381,6 +444,11 @@ paths:
       - application/json
       description: Delete details of a social media corresponding to the input ID
       parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ID of the social media
         in: path
         name: ID
@@ -405,6 +473,11 @@ paths:
       - application/json
       description: Get details of a social media corresponding to the input ID
       parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ID of the social media
         in: path
         name: ID
@@ -429,6 +502,11 @@ paths:
       - application/json
       description: Update details of a social media corresponding to the input ID
       parameters:
+      - description: Type Bearer your_token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ID of the social media
         in: path
         name: ID

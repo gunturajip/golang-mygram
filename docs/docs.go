@@ -37,6 +37,15 @@ const docTemplate = `{
                     "comment"
                 ],
                 "summary": "Get all comments",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -65,6 +74,13 @@ const docTemplate = `{
                 ],
                 "summary": "Post a new comment",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "create a comment",
                         "name": "models.Comment",
@@ -106,6 +122,13 @@ const docTemplate = `{
                 "summary": "Get comment details for the given ID",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "type": "integer",
                         "description": "ID of the comment",
                         "name": "ID",
@@ -141,6 +164,13 @@ const docTemplate = `{
                 ],
                 "summary": "Update comment for the given ID",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "ID of the comment",
@@ -187,6 +217,13 @@ const docTemplate = `{
                 "summary": "Delete comment details for a given ID",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "type": "integer",
                         "description": "ID of the comment",
                         "name": "ID",
@@ -223,6 +260,15 @@ const docTemplate = `{
                     "photo"
                 ],
                 "summary": "Get all photos",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -251,6 +297,13 @@ const docTemplate = `{
                 ],
                 "summary": "Post a new photo",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "create a photo",
                         "name": "models.Photo",
@@ -292,6 +345,13 @@ const docTemplate = `{
                 "summary": "Get photo details for the given photo ID",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "type": "integer",
                         "description": "ID of the photo",
                         "name": "ID",
@@ -327,6 +387,13 @@ const docTemplate = `{
                 ],
                 "summary": "Update photo for the given ID",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "ID of the photo",
@@ -373,6 +440,13 @@ const docTemplate = `{
                 "summary": "Delete photo details for a given ID",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "type": "integer",
                         "description": "ID of the photo",
                         "name": "ID",
@@ -409,6 +483,15 @@ const docTemplate = `{
                     "social media"
                 ],
                 "summary": "Get all social media",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -437,6 +520,13 @@ const docTemplate = `{
                 ],
                 "summary": "Post a new social media",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "create a social media",
                         "name": "models.Socialmedia",
@@ -478,6 +568,13 @@ const docTemplate = `{
                 "summary": "Get social media details for the given ID",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "type": "integer",
                         "description": "ID of the social media",
                         "name": "ID",
@@ -513,6 +610,13 @@ const docTemplate = `{
                 ],
                 "summary": "Update social media for the given ID",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "ID of the social media",
@@ -558,6 +662,13 @@ const docTemplate = `{
                 ],
                 "summary": "Delete social media details for a given ID",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Type Bearer your_token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "ID of the social media",

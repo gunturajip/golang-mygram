@@ -16,6 +16,7 @@ import (
 // @Tags social media
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
 // @Router /socialmedia [get]
@@ -43,6 +44,7 @@ func GetSocialMedias(c *gin.Context) {
 // @Tags social media
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Param ID path int true "ID of the social media"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
@@ -72,6 +74,7 @@ func GetSocialMedia(c *gin.Context) {
 // @Tags social media
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Param models.Socialmedia body models.Socialmedia true "create a social media"
 // @Success 201 {object} models.Response
 // @Failure 400 {object} models.Response
@@ -110,6 +113,7 @@ func CreateSocialMedia(c *gin.Context) {
 // @Tags social media
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Param ID path int true "ID of the social media"
 // @Param models.Socialmedia body models.Socialmedia true "update social media"
 // @Success 200 {object} models.Response
@@ -146,6 +150,7 @@ func UpdateSocialMedia(c *gin.Context) {
 // @Tags social media
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Param ID path int true "ID of the social media"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response

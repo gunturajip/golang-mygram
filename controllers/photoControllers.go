@@ -16,6 +16,7 @@ import (
 // @Tags photo
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
 // @Router /photos [get]
@@ -43,6 +44,7 @@ func GetPhotos(c *gin.Context) {
 // @Tags photo
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Param ID path int true "ID of the photo"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
@@ -72,6 +74,7 @@ func GetPhoto(c *gin.Context) {
 // @Tags photo
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Param models.Photo body models.Photo true "create a photo"
 // @Success 201 {object} models.Response
 // @Failure 400 {object} models.Response
@@ -110,6 +113,7 @@ func CreatePhoto(c *gin.Context) {
 // @Tags photo
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Param ID path int true "ID of the photo"
 // @Param models.Photo body models.Photo true "update photo"
 // @Success 200 {object} models.Response
@@ -146,6 +150,7 @@ func UpdatePhoto(c *gin.Context) {
 // @Tags photo
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"y
 // @Param ID path int true "ID of the photo"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response

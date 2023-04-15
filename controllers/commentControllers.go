@@ -16,6 +16,7 @@ import (
 // @Tags comment
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
 // @Router /comments [get]
@@ -43,6 +44,7 @@ func GetComments(c *gin.Context) {
 // @Tags comment
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Param ID path int true "ID of the comment"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
@@ -72,6 +74,7 @@ func GetComment(c *gin.Context) {
 // @Tags comment
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Param models.Comment body models.Comment true "create a comment"
 // @Success 201 {object} models.Response
 // @Failure 400 {object} models.Response
@@ -119,6 +122,7 @@ func CreateComment(c *gin.Context) {
 // @Tags comment
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Param ID path int true "ID of the comment"
 // @Param models.Comment body models.Comment true "update comment"
 // @Success 200 {object} models.Response
@@ -164,6 +168,7 @@ func UpdateComment(c *gin.Context) {
 // @Tags comment
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Type Bearer your_token"
 // @Param ID path int true "ID of the comment"
 // @Success 200 {object} models.Response
 // @Failure 400 {object} models.Response
