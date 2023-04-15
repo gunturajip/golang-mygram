@@ -749,11 +749,11 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "register a user",
-                        "name": "models.User",
+                        "name": "Input",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.User"
+                            "$ref": "#/definitions/controllers.registerInput"
                         }
                     }
                 ],
@@ -782,6 +782,23 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.registerInput": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "username": {
                     "type": "string"
                 }
             }
@@ -867,32 +884,6 @@ const docTemplate = `{
                 },
                 "user_id": {
                     "type": "integer"
-                }
-            }
-        },
-        "models.User": {
-            "type": "object",
-            "properties": {
-                "age": {
-                    "type": "integer"
-                },
-                "created_at": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "updated_at": {
-                    "type": "string"
-                },
-                "username": {
-                    "type": "string"
                 }
             }
         }
