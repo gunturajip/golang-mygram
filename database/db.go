@@ -37,6 +37,20 @@ func StartDB() {
 	db.Debug().AutoMigrate(models.User{}, models.Photo{}, models.Socialmedia{}, models.Comment{})
 }
 
+func CloseDB() {
+	sqlDB, err := db.DB()
+	if err != nil {
+		panic(err)
+	}
+
+	if sqlDB != nil {
+		err := sqlDB.Close()
+		if err != nil {
+			log.Fatal("error closing to database :", err)
+		}
+	}
+}
+
 func GetDB() *gorm.DB {
 	return db
 }
