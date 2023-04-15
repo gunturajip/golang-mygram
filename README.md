@@ -24,8 +24,6 @@ If you find this project useful, please consider giving it a ⭐️ on [GitHub](
 
 ## Endpoints
 
-### [Authentication](#authentication)
-
 | Method | Endpoint          | Description                       |
 | ------ | ----------------- | --------------------------------- |
 | POST   | `/users/register` | Register a new user               |
