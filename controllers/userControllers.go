@@ -11,6 +11,13 @@ import (
 
 var appJSON = "application/json"
 
+type registerInput struct {
+	Username string `gorm:"not null;uniqueIndex" json:"username" form:"username" valid:"required~Your username is required"`
+	Email    string `gorm:"not null;uniqueIndex" json:"email" form:"email" valid:"required~Your email is required, email~Invalid email format"`
+	Password string `gorm:"not null" json:"password,omitempty" form:"password" valid:"required~Your password is required, minstringlength(6)~Password has to have a minimum length of 6 characters"`
+	Age      int    `gorm:"not null" json:"age" form:"age" valid:"required~Your age is required, numeric~Age must be numeric"`
+}
+
 type loginInput struct {
 	Email    string `json:"email" form:"email" valid:"required~Your email is required, email~Invalid email format"`
 	Password string `form:"password" valid:"required~Your password is required, minstringlength(6)~Password has to have a minimum length of 6 characters"`
@@ -22,7 +29,7 @@ type loginInput struct {
 // @Tags user
 // @Accept json
 // @Produce json
-// @Param models.User body models.User true "register a user"
+// @Param Input body registerInput true "register a user"
 // @Success 201 {object} models.Response
 // @Failure 400 {object} models.Response
 // @Router /users/register [post]
@@ -33,12 +40,18 @@ func UserRegister(c *gin.Context) {
 	contentType := helpers.GetContentType(c)
 	_, _ = db, contentType
 	User := models.User{}
+	registerInput := registerInput{}
 
 	if contentType == appJSON {
-		c.ShouldBindJSON(&User)
+		c.ShouldBindJSON(&registerInput)
 	} else {
-		c.ShouldBind(&User)
+		c.ShouldBind(&registerInput)
 	}
+
+	User.Email = registerInput.Email
+	User.Password = registerInput.Password
+	User.Username = registerInput.Username
+	User.Age = registerInput.Age
 
 	err := db.Debug().Create(&User).Error
 
